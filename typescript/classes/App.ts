@@ -10,6 +10,7 @@ export default class App {
   constructor() {
     this.createPlayers();
     this.board = new Board();
+    this.board.render()
   }
 
 
