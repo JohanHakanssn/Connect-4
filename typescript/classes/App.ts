@@ -1,12 +1,15 @@
 import prompt from "../helpers/prompt.js";
+import Board from "./Board.js";
 import Player from "./Player.js";
 
 export default class App {
   playerX!: Player;
   playerO!: Player;
+  board: Board;
 
   constructor() {
     this.createPlayers();
+    this.board = new Board();
   }
 
 
