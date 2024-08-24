@@ -11,6 +11,7 @@ export default class App {
     this.createPlayers();
     this.board = new Board();
     this.board.render()
+    this.startGameLoop();
   }
 
 
@@ -21,6 +22,17 @@ export default class App {
     this.playerO = new Player(prompt('Spelare O:s namn: '), 'O')
   }
 
+  startGameLoop() {
+    while (!this.board.gameOver) {
+ console.clear();
+    this.board.render();
+    let player: Player = this.board.currentPlayerColor === 'X' ? this.playerX : this.playerO;
+      let move = prompt(`Ange ditt drag ${player.color} ${player.name} - skriv in rad,kolumn: `);
 
+    let [row, column] = move.split(',').map((x: string) => +x.trim() - 1);
+    this.board.makeMove(player.color, row, column);
+    }
+
+  }
 
 }
