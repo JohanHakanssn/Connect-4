@@ -23,16 +23,16 @@ export default class App {
   }
 
   startGameLoop() {
-    while (!this.board.gameOver) {
- console.clear();
+    while (true) {
+    console.clear();
     this.board.render();
     let player: Player = this.board.currentPlayerColor === 'X' ? this.playerX : this.playerO;
-      let move = prompt(`Ange ditt drag ${player.color} ${player.name} - skriv in rad,kolumn: `);
+      let move = prompt(`Ange ditt drag ${player.color} ${player.name} - skriv in kolumn: `);
+      let column = +move.trim() - 1;
 
-    let [row, column] = move.split(',').map((x: string) => +x.trim() - 1);
-    this.board.makeMove(player.color, row, column);
+      if (this.board.makeMove(player.color, column)) {
+          continue;
+      }
     }
-
   }
-
 }
