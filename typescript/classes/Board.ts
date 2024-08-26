@@ -33,11 +33,22 @@ export default class Board {
 
   checkWinner() {
     for (let row = 0; row < this.matrix.length; row++) {
-      for (let column = 0; column < this.matrix[row].length - 1; column++) {
+      for (let column = 0; column < this.matrix[row].length - 3; column++) {
         if (this.matrix[row][column] !== ' ' &&
           this.matrix[row][column] === this.matrix[row][column + 1] &&
           this.matrix[row][column] === this.matrix[row][column + 2] &&
           this.matrix[row][column] === this.matrix[row][column + 3]) {
+           return this.matrix[row][column];
+        }
+      }
+    }
+
+    for (let column = 0; column < this.matrix[0].length; column++) {
+      for (let row = 0; row < this.matrix.length - 3; row++) {
+        if (this.matrix[row][column] !== ' ' &&
+          this.matrix[row][column] === this.matrix[row + 1][column] &&
+          this.matrix[row][column] === this.matrix[row + 2][column] &&
+          this.matrix[row][column] === this.matrix[row + 3][column]) {
            return this.matrix[row][column];
         }
       }
