@@ -35,7 +35,7 @@ export default class App {
         if (winner) {
           console.clear();
           this.board.render();
-          console.log('vi har en vinnare');
+          console.log(`Vinnare: ${player.name}`);
           this.board.gameOver = true;
         }
       }

@@ -32,6 +32,7 @@ export default class Board {
   }
 
   checkWinner() {
+    // Horizontally
     for (let row = 0; row < this.matrix.length; row++) {
       for (let column = 0; column < this.matrix[row].length - 3; column++) {
         if (this.matrix[row][column] !== ' ' &&
@@ -43,6 +44,7 @@ export default class Board {
       }
     }
 
+    // Vertically
     for (let column = 0; column < this.matrix[0].length; column++) {
       for (let row = 0; row < this.matrix.length - 3; row++) {
         if (this.matrix[row][column] !== ' ' &&
@@ -53,6 +55,30 @@ export default class Board {
         }
       }
     }
+
+    //  Diagonally DOWN from left to right.
+     for (let row = 0; row < this.matrix.length - 3; row++) {
+       for (let column = 0; column < this.matrix[row].length - 3; column++) {
+         if (this.matrix[row][column] !== ' ' &&
+           this.matrix[row][column] === this.matrix[row + 1][column + 1] &&
+           this.matrix[row][column] === this.matrix[row + 2][column + 2] &&
+           this.matrix[row][column] === this.matrix[row + 3][column + 3]) {
+            return this.matrix[row][column];
+         }
+       }
+     }
+
+     // Diagonally UP from left to right.
+     for (let row = 3; row < this.matrix.length; row++) {
+       for (let column = 0; column <= this.matrix[row].length - 3; column++) {
+         if (this.matrix[row][column] !== ' ' &&
+           this.matrix[row][column] === this.matrix[row - 1][column + 1] &&
+           this.matrix[row][column] === this.matrix[row - 2][column + 2] &&
+           this.matrix[row][column] === this.matrix[row - 3][column + 3]) {
+            return this.matrix[row][column];
+         }
+       }
+     }
   }
 }
 
