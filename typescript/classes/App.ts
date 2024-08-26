@@ -23,7 +23,7 @@ export default class App {
   }
 
   startGameLoop() {
-    while (true) {
+    while (!this.board.gameOver) {
     console.clear();
     this.board.render();
     let player: Player = this.board.currentPlayerColor === 'X' ? this.playerX : this.playerO;
@@ -31,8 +31,15 @@ export default class App {
       let column = +move.trim() - 1;
 
       if (this.board.makeMove(player.color, column)) {
-          continue;
+        const winner = this.board.checkWinner();
+        if (winner) {
+          console.clear();
+          this.board.render();
+          console.log('vi har en vinnare');
+          this.board.gameOver = true;
+        }
       }
     }
   }
 }
+

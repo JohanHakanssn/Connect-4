@@ -3,7 +3,7 @@ export default class Board {
   currentPlayerColor: string;
   // winner: boolean;
   // isADraw: boolean;
-  //  isGameOver: boolean;
+   gameOver: boolean;
 
   constructor() {
     this.matrix = [...new Array(6)].map(() =>
@@ -12,7 +12,7 @@ export default class Board {
     this.currentPlayerColor = 'X';
     // this.winner = false;
     // this.isADraw = false;
-    // this.isGameOver = false;
+     this.gameOver = false;
   }
 
   render() {
@@ -29,9 +29,21 @@ export default class Board {
         return true;
       }
     }
-      console.log('Kolumnen är full, välj en annan kolumn.');
-      return false;
+  }
+
+  checkWinner() {
+    for (let row = 0; row < this.matrix.length; row++) {
+      for (let column = 0; column < this.matrix[row].length - 1; column++) {
+        if (this.matrix[row][column] !== ' ' &&
+          this.matrix[row][column] === this.matrix[row][column + 1] &&
+          this.matrix[row][column] === this.matrix[row][column + 2] &&
+          this.matrix[row][column] === this.matrix[row][column + 3]) {
+           return this.matrix[row][column];
+        }
+      }
+    }
   }
 }
+
 
 
