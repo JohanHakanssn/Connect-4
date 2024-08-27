@@ -1,8 +1,6 @@
 export default class Board {
   matrix: string[][];
   currentPlayerColor: string;
-  // winner: boolean;
-  // isADraw: boolean;
    gameOver: boolean;
 
   constructor() {
@@ -10,8 +8,6 @@ export default class Board {
             [...new Array(7)].map(() => ' ')
     );
     this.currentPlayerColor = 'X';
-    // this.winner = false;
-    // this.isADraw = false;
      this.gameOver = false;
   }
 
@@ -29,6 +25,7 @@ export default class Board {
         return true;
       }
     }
+    return false;
   }
 
   checkWinner() {
@@ -79,6 +76,14 @@ export default class Board {
          }
        }
      }
+  }
+
+  drawCheck() {
+    if (!this.matrix.flat().includes(' ')) {
+      this.gameOver = true;
+      return 'Det blev oavgjort';
+    }
+    return null;
   }
 }
 

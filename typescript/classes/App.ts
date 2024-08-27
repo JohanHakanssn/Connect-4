@@ -27,7 +27,7 @@ export default class App {
     console.clear();
     this.board.render();
     let player: Player = this.board.currentPlayerColor === 'X' ? this.playerX : this.playerO;
-      let move = prompt(`Ange ditt drag ${player.color} ${player.name} - skriv in kolumn: `);
+      let move = prompt(`Ange ditt drag ${player.name}(${player.color}) - skriv in kolumn: `);
       let column = +move.trim() - 1;
 
       if (this.board.makeMove(player.color, column)) {
@@ -37,6 +37,13 @@ export default class App {
           this.board.render();
           console.log(`Vinnare: ${player.name}`);
           this.board.gameOver = true;
+        } else {
+          const draw = this.board.drawCheck()
+          if (draw) {
+            console.clear();
+            this.board.render();
+            console.log(draw);
+          }
         }
       }
     }
