@@ -1,6 +1,6 @@
 export default class Computer {
-  name: String;
-  color: String;
+  name: string;
+  color: string;
 
 
   constructor(name: string, color: string) {

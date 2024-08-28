@@ -7,15 +7,36 @@ export default class App {
   playerX!: Player;
   playerO!: Player;
   board: Board;
-  computer: Computer;
+  computer!: Computer;
 
 
   constructor() {
-    this.createPlayers();
+    this.gameMode();
     this.board = new Board();
     this.board.render()
     this.startGameLoop();
-    this.computer = new Computer('Computer', 'O');
+  }
+
+  gameMode() {
+    console.clear();
+    console.log('Välj spelläge: 1 för att spela mot datorn, 2 för att spela mot en annan spelare.');
+    const choice = prompt('Ange ditt val: (1 - 2):');
+
+    if (choice === '1') {
+      this.createComputerOpponent();
+    } else if (choice === '2') {
+      this.createPlayers()
+    } else {
+      console.log('Ogilitit val, välj 1 eller 2.');
+    }
+  }
+
+  createComputerOpponent() {
+    console.clear()
+    console.log('Spelare vs Dator');
+    this.computer = new Computer('Computer', 'O')
+    this.playerX = new Player(prompt('Spelare X:s namn: '), 'X');
+    this.playerO = this.computer;
   }
 
 
@@ -25,6 +46,7 @@ export default class App {
     this.playerX = new Player(prompt('Spelare X:s namn: '), 'X')
     this.playerO = new Player(prompt('Spelare O:s namn: '), 'O')
   }
+
 
   startGameLoop() {
     while (!this.board.gameOver) {
