@@ -1,17 +1,21 @@
 import prompt from "../helpers/prompt.js";
 import Board from "./Board.js";
 import Player from "./Player.js";
+import Computer from "./Computer.js";
 
 export default class App {
   playerX!: Player;
   playerO!: Player;
   board: Board;
+  computer: Computer;
+
 
   constructor() {
     this.createPlayers();
     this.board = new Board();
     this.board.render()
     this.startGameLoop();
+    this.computer = new Computer('Computer', 'O');
   }
 
 
