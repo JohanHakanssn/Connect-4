@@ -5,7 +5,7 @@ import Computer from "./Computer.js";
 
 export default class App {
   playerX!: Player;
-  playerO!: Player;
+  playerO!: Player | Computer;
   board: Board;
   computer!: Computer;
 
@@ -50,10 +50,18 @@ export default class App {
 
   startGameLoop() {
     while (!this.board.gameOver) {
-    console.clear();
-    this.board.render();
-    let player: Player = this.board.currentPlayerColor === 'X' ? this.playerX : this.playerO;
-      let move = prompt(`Ange ditt drag ${player.name}(${player.color}) - skriv in kolumn: `);
+      console.clear();
+      this.board.render();
+      let player: Player | Computer = this.board.currentPlayerColor === 'X' ? this.playerX : this.playerO;
+
+      let move;
+      if (player instanceof Computer) {
+        console.log(`${player.name}(${player.color}) gör ett drag...`);
+        move = player.computerMove().toString();
+      } else {
+        move = prompt(`Ange ditt drag ${player.name}(${player.color}) - skriv in kolumn: `)
+      }
+
       let column = +move.trim() - 1;
 
       if (this.board.makeMove(player.color, column)) {
